@@ -1,0 +1,27 @@
+services:
+  joy2twist:
+    image: husarion/joy2twist:galactic
+    network_mode: host
+    ipc: host
+    devices:
+      - /dev/input
+    volumes: 
+      - ./joy2twist.yaml:/joy2twist.yaml
+    command: >
+      ros2 launch
+      joy2twist gamepad_controller.launch.py
+      joy2twist_params_file:=/joy2twist.yaml 
+
+  rosbot-xl:
+    image: husarion/rosbot-xl:humble
+    network_mode: host
+    ipc: host
+    command: ros2 launch rosbot_xl_bringup bringup.launch.py mecanum:=${MECANUM:-False}
+
+  microros:
+    image: microros/micro-ros-agent:humble
+    network_mode: host
+    ipc: host
+    volumes:
+      - ./micro-ros_entrypoint.sh:/micro-ros_entrypoint.sh
+    command: udp4 --port 8888
