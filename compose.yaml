@@ -1,15 +1,13 @@
 services:
   joy2twist:
-    image: husarion/joy2twist:galactic
+    image: husarion/joy2twist:humble
     devices:
       - /dev/input
     volumes: 
       - ./joy2twist.yaml:/joy2twist.yaml
-    command: >
-      ros2 launch
-      joy2twist gamepad_controller.launch.py
-
-# joy2twist_params_file:=/joy2twist.yaml
+    command: > 
+      ros2 launch joy2twist gamepad_controller.launch.py
+        joy2twist_params_file:=/joy2twist.yaml
 
   rosbot-xl:
     image: husarion/rosbot-xl:humble
@@ -18,7 +16,7 @@ services:
   microros:
     image: microros/micro-ros-agent:humble
     ports:
-      - "8888:8888/udp"
+      - 8888:8888/udp
     volumes:
       - ./micro-ros_entrypoint.sh:/micro-ros_entrypoint.sh
     command: udp4 --port 8888
