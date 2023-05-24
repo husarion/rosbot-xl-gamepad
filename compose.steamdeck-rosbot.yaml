@@ -13,6 +13,6 @@ services:
   microros:
     image: husarion/micro-ros-agent:humble
     <<: *net-config
-    ports:
-      - 8888:8888/udp
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
     command: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
