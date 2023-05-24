@@ -17,6 +17,6 @@
         angular_z: 2 # Right joystick
         linear_x: 1 # Left joystick
         linear_y: 0 # Left joystick
-      dead_man_switch: 9 # LB
-      fast_mode: 7 # RT
-      slow_mode: 5 # RB
+      dead_man_switch: 7 # LB
+      fast_mode: 10 # RT
+      slow_mode: 8 # RB
