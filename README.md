@@ -8,6 +8,21 @@ Choose one of the supported gamepads
 
 ### Logitech F710
 
+Make sure you have `yq` installed:
+
+```
+sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_amd64 -o /usr/bin/yq
+sudo chmod +x /usr/bin/yq
+```
+
+Flash the correct firmware:
+
+```
+cd rosbot-xl-gamepad
+chmod +x flash_rosbot_firmware.sh
+./flash_rosbot_firmware.sh
+```
+
 Clone this repository on the robot, connect a gampad to the USB type A port at the back panel of ROSbot XL and run
 
 ```bash
