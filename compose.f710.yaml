@@ -13,8 +13,19 @@ services:
     image: husarion/rosbot-xl:humble
     command: ros2 launch rosbot_xl_bringup bringup.launch.py mecanum:=${MECANUM:-True}
 
+  # microros:
+  #   image: husarion/micro-ros-agent:humble
+  #   ports:
+  #     - 8888:8888/udp
+  #   command: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+
   microros:
-    image: husarion/micro-ros-agent:humble
-    ports:
-      - 8888:8888/udp
-    command: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+    image: husarion/micro-xrce-agent:v2.4.1
+    container_name: microros
+    restart: unless-stopped
+    network_mode: host
+    ipc: host
+    environment: #only two envs are valid for micro-xrce-agent
+      - FASTRTPS_DEFAULT_PROFILES_FILE            # ***
+      - XRCE_DOMAIN_ID_OVERRIDE=${ROS_DOMAIN_ID:-}  # ***
+    command: MicroXRCEAgent udp4 --port 8888
