@@ -45,6 +45,6 @@ docker compose -f compose.steamdeck-rosbot.yaml up
 docker compose -f compose.steamdeck.yaml up
 ```
 
-## Controlling
+## Controlling the robot
 
-Press the **Dead Man Switch** and use left and right joysticks to drive the robot around. [More guides are here](https://husarion.com/tutorials/other-tutorials/rosbot-gamepad/)
+![ROSbot control with gamepad](.docs/gamepad-legend.jpg)
