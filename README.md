@@ -47,4 +47,4 @@ docker compose -f compose.steamdeck.yaml up
 
 ## Controlling the robot
 
-![ROSbot control with gamepad](.docs/gamepad-legend.jpg)
+![ROSbot control with gamepad](.docs/gamepad-legend.png)
