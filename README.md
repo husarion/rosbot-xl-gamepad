@@ -4,9 +4,12 @@ A GitHub template for ROSbot XL: a gamepad control
 
 ## Quick Start
 
-Choose one of the supported gamepads
+Choose one of the supported gamepads:
 
-### Logitech F710
+- [Logitech F710](#logitech-f710)
+- [Steamdeck](#steamdeck)
+
+## Logitech F710
 
 Make sure you have `yq` installed:
 
@@ -29,7 +32,14 @@ Clone this repository on the robot, connect a gampad to the USB type A port at t
 docker compose -f compose.f710.yaml up
 ```
 
-### Steamdeck
+### Controlling the robot
+
+![ROSbot control with gamepad](.docs/gamepad-legend.png)
+
+> [!NOTE]
+> More details on the use of the **F710 Gamepad** and `joy2twist` package in ROS 2 can be found in Husarion's article in the [ROS Equipment section](https://husarion.com/tutorials/ros-equipment/gamepad-f710/).
+
+## Steamdeck
 
 ROSbot XL and Steamdeck need to be in the same LAN network at first. After that:
 
@@ -44,7 +54,3 @@ docker compose -f compose.steamdeck-rosbot.yaml up
 ```
 docker compose -f compose.steamdeck.yaml up
 ```
-
-## Controlling the robot
-
-![ROSbot control with gamepad](.docs/gamepad-legend.png)
