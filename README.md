@@ -26,7 +26,7 @@ chmod +x flash_rosbot_firmware.sh
 ./flash_rosbot_firmware.sh
 ```
 
-Clone this repository on the robot, connect a gampad to the USB type A port at the back panel of ROSbot XL and run
+Clone this repository on the robot, connect a gamepad to the USB type A port at the back panel of ROSbot XL and run
 
 ```bash
 docker compose -f compose.f710.yaml up
