@@ -21,7 +21,7 @@ sudo chmod +x /usr/bin/yq
 Flash the correct firmware:
 
 ```
-git clone
+git clone https://github.com/husarion/rosbot-xl-gamepad
 cd rosbot-xl-gamepad
 chmod +x flash_rosbot_firmware.sh
 ./flash_rosbot_firmware.sh
