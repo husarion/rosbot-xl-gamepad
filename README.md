@@ -14,7 +14,7 @@ Choose one of the supported gamepads:
 Make sure you have `yq` installed:
 
 ```
-sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_arm64 -o /usr/bin/yq
+sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_$(dpkg --print-architecture) -o /usr/bin/yq
 sudo chmod +x /usr/bin/yq
 ```
 
