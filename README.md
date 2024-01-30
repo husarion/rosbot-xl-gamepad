@@ -14,13 +14,14 @@ Choose one of the supported gamepads:
 Make sure you have `yq` installed:
 
 ```
-sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_amd64 -o /usr/bin/yq
+sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_arm64 -o /usr/bin/yq
 sudo chmod +x /usr/bin/yq
 ```
 
 Flash the correct firmware:
 
 ```
+git clone
 cd rosbot-xl-gamepad
 chmod +x flash_rosbot_firmware.sh
 ./flash_rosbot_firmware.sh
