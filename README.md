@@ -18,7 +18,7 @@ sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_
 sudo chmod +x /usr/bin/yq
 ```
 
-Flash the correct firmware:
+Clone this repository on the robot and flash the correct firmware:
 
 ```
 git clone https://github.com/husarion/rosbot-xl-gamepad
@@ -27,7 +27,7 @@ chmod +x flash_rosbot_firmware.sh
 ./flash_rosbot_firmware.sh
 ```
 
-Clone this repository on the robot, connect a gamepad to the USB type A port at the back panel of ROSbot XL and run
+Connect a gamepad to the USB type A port at the back panel of ROSbot XL and run
 
 ```bash
 docker compose -f compose.f710.yaml up
