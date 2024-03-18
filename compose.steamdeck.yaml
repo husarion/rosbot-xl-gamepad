@@ -10,8 +10,8 @@ services:
     <<: *net-config
     devices:
       - /dev/input
-    volumes: 
+    volumes:
       - ./config/steamdeck.yaml:/params.yaml
-    command: > 
+    command: >
       ros2 launch joy2twist gamepad_controller.launch.py
         joy2twist_params_file:=/params.yaml

@@ -1,6 +1,6 @@
 # rosbot-xl-gamepad
 
-A GitHub template for ROSbot XL: a gamepad control 
+A GitHub template for ROSbot XL: a gamepad control
 
 ## Quick Start
 
