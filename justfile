@@ -8,6 +8,8 @@ default:
 alias flash := flash-firmware
 [private]
 alias f710 := start-f710
+[private]
+alias steamdeck-rosbot := start-steamdeck-rosbot
 
 [private]
 pre-commit:
@@ -21,10 +23,9 @@ pre-commit:
 # Copy repo content to remote host with 'rsync' and watch for changes
 sync hostname="${ROBOT_HOSTNAME}" password="husarion": _install-rsync _run-as-user
     #!/bin/bash
-    mkdir -m 775 -p maps
-    sshpass -p "{{password}}" rsync -vRr --exclude='.git/' --exclude='maps/' --delete ./ husarion@{{hostname}}:/home/husarion/${PWD##*/}
-    while inotifywait -r -e modify,create,delete,move ./ --exclude='.git/' --exclude='maps/' ; do
-        sshpass -p "{{password}}" rsync -vRr --exclude='.git/' --exclude='maps/' --delete ./ husarion@{{hostname}}:/home/husarion/${PWD##*/}
+    sshpass -p "{{password}}" rsync -vRr --exclude='.git/' --delete ./ husarion@{{hostname}}:/home/husarion/${PWD##*/}
+    while inotifywait -r -e modify,create,delete,move ./ --exclude='.git/' ; do
+        sshpass -p "{{password}}" rsync -vRr --exclude='.git/' --delete ./ husarion@{{hostname}}:/home/husarion/${PWD##*/}
     done
 
 # flash the proper firmware for STM32 microcontroller in ROSbot XL
@@ -45,10 +46,16 @@ flash-firmware: _install-yq _run-as-user
 # start ROSbot XL ROS 2 driver with F710 gamepad support
 start-f710: _run-as-user
     #!/bin/bash
-    mkdir -m 775 -p maps
     docker compose -f compose.yaml -f compose.f710.yaml down
     docker compose -f compose.yaml -f compose.f710.yaml pull
     docker compose -f compose.yaml -f compose.f710.yaml up
+
+# start ROSbot XL ROS 2 driver with Steamdeck gamepad support
+start-steamdeck-rosbot: _run-as-user
+    #!/bin/bash
+    docker compose -f compose.yaml -f compose.steamdeck-rosbot.yaml down
+    docker compose -f compose.yaml -f compose.steamdeck-rosbot.yaml pull
+    docker compose -f compose.yaml -f compose.steamdeck-rosbot.yaml up
 
 _run-as-root:
     #!/bin/bash

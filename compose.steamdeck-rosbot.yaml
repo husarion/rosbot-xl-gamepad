@@ -1,18 +1,23 @@
-x-net-config:
-  &net-config
-  network_mode: host
-  ipc: host
-  env_file: net.env
+
 
 services:
-  rosbot-xl:
-    image: husarion/rosbot-xl:humble
-    <<: *net-config
-    command: ros2 launch rosbot_xl_bringup bringup.launch.py mecanum:=${MECANUM:-True}
+  rosbot:
+    network_mode: host
+    ipc: host
 
-  microros:
-    image: husarion/micro-ros-agent:humble
-    <<: *net-config
-    environment:
-      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-    command: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+  # subscriber to /joy topic and publisher to /cmd_vel topic
+  teleop_twist_joy:
+    image: husarion/teleop-twist-joy:humble-2.4.5-20240318
+    restart: unless-stopped
+    network_mode: host
+    ipc: host
+    volumes:
+      - ./logitech-f710.yaml:/params.yaml
+    command: ros2 run teleop_twist_joy teleop_node --ros-args --params-file /params.yaml
+
+  # microros:
+  #   image: husarion/micro-ros-agent:humble
+  #   <<: *net-config
+  #   environment:
+  #     - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+  #   command: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888

@@ -1,11 +1,32 @@
 services:
-  joy2twist:
-    image: husarion/joy2twist:humble
+  # joy2twist:
+  #   image: husarion/joy2twist:humble
+  #   restart: unless-stopped
+  #   devices:
+  #     - /dev/input
+  #   volumes:
+  #     - ./config/logitech-f710.yaml:/params.yaml
+  #   command: >
+  #     ros2 launch joy2twist gamepad_controller.launch.py
+  #       joy2twist_params_file:=/params.yaml
+
+  # publisher to /joy topic
+  joy: 
+    image: husarion/teleop-twist-joy:humble-2.4.5-20240318
     restart: unless-stopped
     devices:
       - /dev/input
     volumes:
-      - ./config/logitech-f710.yaml:/params.yaml
-    command: >
-      ros2 launch joy2twist gamepad_controller.launch.py
-        joy2twist_params_file:=/params.yaml
+      - ./joy-params.yaml:/params.yaml
+    command: ros2 run joy joy_node --ros-args --params-file /joy_params.yaml
+
+  # subscriber to /joy topic and publisher to /cmd_vel topic
+  teleop_twist_joy:
+    image: husarion/teleop-twist-joy:humble-2.4.5-20240318
+    restart: unless-stopped
+    volumes:
+      - ./logitech-f710.yaml:/params.yaml
+    command: ros2 run teleop_twist_joy teleop_node --ros-args --params-file /params.yaml
+    # devices:
+    #   - /dev/input
+    # command: ros2 launch teleop_twist_joy teleop-launch.py config_filepath:=/params.yaml # to run joy and teleop_twist_joy at the same time
